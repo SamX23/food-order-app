@@ -1,5 +1,5 @@
+import Layout from "@/components/layout";
 import {
-  Page,
   Navbar,
   Block,
   Button,
@@ -8,9 +8,9 @@ import {
   BlockTitle,
 } from "konsta/react";
 
-export default function Mobile() {
+const Mobile = (): JSX.Element => {
   return (
-    <Page>
+    <Layout>
       <Navbar title="My App" />
 
       <Block strong>
@@ -29,6 +29,8 @@ export default function Mobile() {
         <Button>Button 1</Button>
         <Button>Button 2</Button>
       </Block>
-    </Page>
+    </Layout>
   );
-}
+};
+
+export default Mobile;
