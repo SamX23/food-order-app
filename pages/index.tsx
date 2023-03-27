@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AppContext from "@/context";
 import { Navbar, Block, Button, List, ListItem } from "konsta/react";
 import Image from "next/image";
@@ -7,7 +7,9 @@ import Layout from "@/components/layout";
 const Home = (): JSX.Element => {
   const context = useContext(AppContext);
 
-  console.log(context);
+  useEffect(() => {
+    console.log(context.basket);
+  }, [context]);
 
   return (
     <Layout>
@@ -25,7 +27,7 @@ const Home = (): JSX.Element => {
       </Block>
       <Block className="space-y-4">
         <p>Here comes the button</p>
-        <Button>Action</Button>
+        <Button onClick={() => context.addToBasket("asd")}>Action</Button>
 
         <List>
           <ListItem href="/" title="Home" />
