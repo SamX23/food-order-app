@@ -5,6 +5,7 @@ export const StateContext = createContext(initialValue);
 
 const ContextProvider = ({ children }: any) => {
   return (
+    // TODO : Fix type error
     <StateContext.Provider value={useReducer(reducer, initialValue)}>
       {children}
     </StateContext.Provider>

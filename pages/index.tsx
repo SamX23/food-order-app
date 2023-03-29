@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   Block,
@@ -7,6 +7,9 @@ import {
   Toolbar,
   Sheet,
   Link,
+  List,
+  ListItem,
+  Toast,
 } from "konsta/react";
 import { useGlobalState } from "@/context/Provider";
 import { addToBasket, toggleBasket } from "@/context/actions";
@@ -15,10 +18,47 @@ import Layout from "@/components/layout";
 
 const Home = (): JSX.Element => {
   const [{ basket }, dispatch]: any = useGlobalState();
+  const [toastOpened, setToastOpened] = useState(false);
 
   useEffect(() => {
     console.log(basket);
   }, [basket]);
+
+  const FOOD_DATA = [
+    {
+      id: 0,
+      title: "Yellow Submarine",
+      subTitle: "Beatles",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
+      price: "5000",
+      image: "/assets/images/fla-1.jpg",
+    },
+    {
+      id: 1,
+      title: "Yellow Submarine",
+      subTitle: "Beatles",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
+      price: "5000",
+      image: "/assets/images/fla-2.jpg",
+    },
+    {
+      id: 2,
+      title: "Yellow Submarine",
+      subTitle: "Beatles",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
+      price: "5000",
+      image: "/assets/images/fla-3.jpg",
+    },
+  ];
+
+  const openToast = (setter: (arg0: boolean) => void) => {
+    // close other toast
+    setter(true);
+    setTimeout(() => setter(false), 1500);
+  };
 
   return (
     <Layout>
@@ -43,7 +83,41 @@ const Home = (): JSX.Element => {
           className="mx-auto my-4 dark:bg-white p-2 rounded"
         />
 
-        <Button onClick={() => dispatch(addToBasket("asdasd"))}>Action</Button>
+        <BlockTitle>Food List</BlockTitle>
+        <List>
+          {FOOD_DATA.map(
+            ({ title, subTitle, description, price, image }, index) => (
+              <ListItem
+                key={index}
+                title={title}
+                after={`Rp. ${price}`}
+                subtitle={subTitle}
+                text={description}
+                media={
+                  <Image
+                    src={image}
+                    alt={title}
+                    width={80}
+                    height={80}
+                    priority
+                    className="mx-auto my-4 dark:bg-white rounded"
+                  />
+                }
+                onClick={() => {
+                  dispatch(
+                    addToBasket({
+                      title,
+                      price,
+                    })
+                  );
+
+                  openToast(setToastOpened);
+                }}
+              />
+            )
+          )}
+        </List>
+
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore
           ratione unde accusantium distinctio nulla quia numquam earum odio,
@@ -115,12 +189,33 @@ const Home = (): JSX.Element => {
         </Block>
       </Sheet>
 
+      {/* Toast */}
+      <Toast
+        opened={toastOpened}
+        button={
+          <Button
+            rounded
+            clear
+            small
+            inline
+            onClick={() => setToastOpened(false)}
+          >
+            Close
+          </Button>
+        }
+      >
+        <div className="shrink">Item added to basket !</div>
+      </Toast>
       {/* Basket Info */}
-      <Toolbar className="bottom-0 fixed">
-        <Block className="bg-primary w-full">
-          <Button onClick={() => dispatch(toggleBasket())}>Open Basket</Button>
-        </Block>
-      </Toolbar>
+      {basket.items.length > 0 && (
+        <Toolbar className="bottom-0 fixed">
+          <Block className="bg-primary w-full">
+            <Button onClick={() => dispatch(toggleBasket())}>
+              Open Basket
+            </Button>
+          </Block>
+        </Toolbar>
+      )}
     </Layout>
   );
 };

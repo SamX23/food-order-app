@@ -10,7 +10,10 @@ const Layout = ({
     <Head>
       <title>{title}</title>
       <meta name="description" content={desc} />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
+      />
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Page>{children}</Page>
