@@ -1,19 +1,16 @@
-import Context, { initialValue } from "@/context";
-import { useCallback, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
+import { initialValue, reducer } from "@/context/reducer";
+
+export const StateContext = createContext(initialValue);
 
 const ContextProvider = ({ children }: any) => {
-  const [basket, setBasket] = useState<any>(initialValue.basket.items);
-
-  const addToBasket = useCallback(
-    (item: any) => setBasket((state: []) => [...state, item]),
-    []
-  );
-
   return (
-    <Context.Provider value={{ basket, addToBasket }}>
+    <StateContext.Provider value={useReducer(reducer, initialValue)}>
       {children}
-    </Context.Provider>
+    </StateContext.Provider>
   );
 };
+
+export const useGlobalState = () => useContext(StateContext);
 
 export default ContextProvider;
