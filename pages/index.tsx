@@ -15,6 +15,7 @@ import { useGlobalState } from "@/context/Provider";
 import { addToBasket, toggleBasket } from "@/context/actions";
 import Image from "next/image";
 import Layout from "@/components/layout";
+import { FOOD_DATA } from "@/utils/constant/FOOD_DATA";
 
 const Home = (): JSX.Element => {
   const [{ basket, isBasketOpened }, dispatch]: any = useGlobalState();
@@ -23,39 +24,6 @@ const Home = (): JSX.Element => {
   useEffect(() => {
     console.log(basket);
   }, [basket]);
-
-  const FOOD_DATA = [
-    {
-      id: 0,
-      title: "Yellow Submarine",
-      subTitle: "Beatles",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
-      price: "5000",
-      image: "/assets/images/fla-1.jpg",
-      quantity: 1,
-    },
-    {
-      id: 1,
-      title: "Yellow Submarine",
-      subTitle: "Beatles",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
-      price: "5000",
-      image: "/assets/images/fla-2.jpg",
-      quantity: 1,
-    },
-    {
-      id: 2,
-      title: "Yellow Submarine",
-      subTitle: "Beatles",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
-      price: "5000",
-      image: "/assets/images/fla-3.jpg",
-      quantity: 1,
-    },
-  ];
 
   const openToast = (setter: (arg0: boolean) => void) => {
     // close other toast
