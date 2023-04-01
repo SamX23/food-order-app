@@ -17,8 +17,8 @@ import Image from "next/image";
 import Layout from "@/components/layout";
 
 const Home = (): JSX.Element => {
-  const [{ basket }, dispatch]: any = useGlobalState();
-  const [toastOpened, setToastOpened] = useState(false);
+  const [{ basket, isBasketOpened }, dispatch]: any = useGlobalState();
+  const [toastOpened, setToastOpened] = useState<boolean>(false);
 
   useEffect(() => {
     console.log(basket);
@@ -33,6 +33,7 @@ const Home = (): JSX.Element => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
       price: "5000",
       image: "/assets/images/fla-1.jpg",
+      quantity: 1,
     },
     {
       id: 1,
@@ -42,6 +43,7 @@ const Home = (): JSX.Element => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
       price: "5000",
       image: "/assets/images/fla-2.jpg",
+      quantity: 1,
     },
     {
       id: 2,
@@ -51,6 +53,7 @@ const Home = (): JSX.Element => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
       price: "5000",
       image: "/assets/images/fla-3.jpg",
+      quantity: 1,
     },
   ];
 
@@ -86,7 +89,10 @@ const Home = (): JSX.Element => {
         <BlockTitle>Food List</BlockTitle>
         <List>
           {FOOD_DATA.map(
-            ({ title, subTitle, description, price, image }, index) => (
+            (
+              { id, title, subTitle, description, price, image, quantity },
+              index
+            ) => (
               <ListItem
                 key={index}
                 title={title}
@@ -106,8 +112,10 @@ const Home = (): JSX.Element => {
                 onClick={() => {
                   dispatch(
                     addToBasket({
+                      id,
                       title,
                       price,
+                      quantity,
                     })
                   );
 
@@ -165,7 +173,7 @@ const Home = (): JSX.Element => {
       {/* Sheet Basket Checkout */}
       <Sheet
         className="pb-safe"
-        opened={basket.opened}
+        opened={isBasketOpened}
         onBackdropClick={() => dispatch(toggleBasket())}
       >
         <Toolbar top>
@@ -207,7 +215,7 @@ const Home = (): JSX.Element => {
         <div className="shrink">Item added to basket !</div>
       </Toast>
       {/* Basket Info */}
-      {basket.items.length > 0 && (
+      {basket.length > 0 && (
         <Toolbar className="bottom-0 fixed">
           <Block className="bg-primary w-full">
             <Button onClick={() => dispatch(toggleBasket())}>

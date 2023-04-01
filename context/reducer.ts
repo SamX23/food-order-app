@@ -1,17 +1,18 @@
-import { ADD_TO_BASKET, ActionTypes, TOGGLE_BASKET } from "./actions";
+import {
+  ADD_TO_BASKET,
+  ActionTypes,
+  INCREASE_ITEM,
+  TOGGLE_BASKET,
+} from "./actions";
 
 export const initialValue = {
-  basket: {
-    items: [],
-    opened: false,
-  },
+  basket: [],
+  isBasketOpened: false,
 };
 
 interface InitialValue {
-  basket: {
-    items: [];
-    opened: boolean;
-  };
+  basket: [];
+  isBasketOpened: boolean;
 }
 
 // Reducer
@@ -21,20 +22,18 @@ export const reducer = (
 ) => {
   switch (action.type) {
     case ADD_TO_BASKET:
-      return {
-        ...state,
-        basket: {
-          ...state.basket,
-          items: [...state.basket.items, action.data],
-        },
-      };
+      const isExist = state.basket.find((item) => item.id === action.data.id);
+
+      if (!isExist) {
+        return {
+          ...state,
+          basket: [...state.basket, action.data],
+        };
+      }
     case TOGGLE_BASKET:
       return {
         ...state,
-        basket: {
-          ...state.basket,
-          opened: !state.basket.opened,
-        },
+        isBasketOpened: !state.isBasketOpened,
       };
 
     default:
