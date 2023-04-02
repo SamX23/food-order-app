@@ -1,15 +1,9 @@
-export const FOOD_DATA: {
-  id: number;
-  title: string;
-  subTitle: string;
-  description: string;
-  price: number;
-  image: string;
-  quantity: number;
-}[] = [
+import { FoodData } from "@/interfaces/food";
+
+export const FOOD_DATA: FoodData[] = [
   {
     id: 0,
-    title: "Yellow Submarine",
+    title: "Fla Hijau",
     subTitle: "Beatles",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
@@ -19,7 +13,7 @@ export const FOOD_DATA: {
   },
   {
     id: 1,
-    title: "Yellow Submarine",
+    title: "Brownies",
     subTitle: "Beatles",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",
@@ -29,7 +23,7 @@ export const FOOD_DATA: {
   },
   {
     id: 2,
-    title: "Yellow Submarine",
+    title: "Brownies Mini",
     subTitle: "Beatles",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.",

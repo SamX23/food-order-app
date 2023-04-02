@@ -1,3 +1,4 @@
+import { FoodData } from "@/interfaces/food";
 import {
   ADD_TO_BASKET,
   ActionTypes,
@@ -5,13 +6,13 @@ import {
   TOGGLE_BASKET,
 } from "./actions";
 
-export const initialValue = {
+export const initialValue: InitialValue = {
   basket: [],
   isBasketOpened: false,
 };
 
 interface InitialValue {
-  basket: [];
+  basket: FoodData[];
   isBasketOpened: boolean;
 }
 
@@ -29,7 +30,10 @@ export const reducer = (
           ...state,
           basket: [...state.basket, action.data],
         };
+      } else {
+        return { ...state };
       }
+
     case TOGGLE_BASKET:
       return {
         ...state,
