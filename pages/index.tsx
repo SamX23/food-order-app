@@ -18,15 +18,15 @@ const Home = (): JSX.Element => {
 
   return (
     <Layout>
-      <Navbar large transparent title="Jajanan Bu Nanay" subtitle="Subtitle" />
+      <Navbar large transparent title="Jajanan Bu Nanay" />
 
       <Block strong className="text-center">
-        <h1 className="text-xl w-[200px] mx-auto font-semibold m-0">
+        <h1 className="text-xl w-[200px] mx-auto font-semibold mb-2">
           Ayo jajan di warung online{" "}
           <span className="text-primary font-bold">Bu Nanay</span>
         </h1>
         <p className="text-slate-900 dark:text-slate-300">
-          Jajanan sehat halal dan berkah
+          Jajanan sehat, halal dan berkah
         </p>
 
         <Image
@@ -39,10 +39,14 @@ const Home = (): JSX.Element => {
         />
       </Block>
 
-      <h2 className="text-center w-full text-lg font-semibold uppercase">
-        Daftar Makanan
-      </h2>
-      <List strongIos outlineIos>
+      <div className="text-center w-full">
+        <h2 className="text-lg font-semibold uppercase">Daftar Makanan</h2>
+        <p className="text-slate-900 dark:text-slate-300 text-xs">
+          Tekan makanan untuk ditambahkan ke keranjang
+        </p>
+      </div>
+
+      <List strongIos>
         {FOOD_DATA.map((data, index) => (
           <FoodItem key={index} data={data} />
         ))}

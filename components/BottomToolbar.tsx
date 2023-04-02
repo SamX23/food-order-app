@@ -11,7 +11,7 @@ const BottomToolbar = () => {
     <Toolbar className="bottom-0 left-0 fixed">
       <Button className="rounded-md" onClick={() => dispatch(toggleBasket())}>
         <BiCartAlt className="text-lg" />
-        <span className="ml-2">Cart</span>
+        <span className="ml-2">Keranjang</span>
       </Button>
     </Toolbar>
   );

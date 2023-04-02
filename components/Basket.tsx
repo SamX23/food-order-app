@@ -87,7 +87,7 @@ const Basket = () => {
         </div>
 
         <Button
-          className="ml-auto rounded-xl py-6 w-[150px] shadow"
+          className="ml-auto rounded-xl py-6 px-4 max-w-fit shadow"
           onClick={handleCheckout}
         >
           {loading ? "Membuka whatsapp" : "Beli Sekarang"}

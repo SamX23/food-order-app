@@ -34,6 +34,7 @@ const FoodItem = ({
         />
       }
       onClick={() => clickable && dispatch(addToBasket(data))}
+      className="cursor-pointer"
     />
   );
 };
