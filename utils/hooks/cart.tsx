@@ -1,4 +1,3 @@
-import CustomToast from "@/components/Toast";
 import { useGlobalState } from "@/context/Provider";
 import { FoodData } from "@/interfaces/food";
 import { useCallback, useEffect, useState } from "react";

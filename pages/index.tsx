@@ -70,24 +70,6 @@ const Home = (): JSX.Element => {
           optio, nisi rem deserunt. Molestiae delectus, ut assumenda numquam
           magni enim.
         </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore
-          ratione unde accusantium distinctio nulla quia numquam earum odio,
-          optio, nisi rem deserunt. Molestiae delectus, ut assumenda numquam
-          magni enim.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore
-          ratione unde accusantium distinctio nulla quia numquam earum odio,
-          optio, nisi rem deserunt. Molestiae delectus, ut assumenda numquam
-          magni enim.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore
-          ratione unde accusantium distinctio nulla quia numquam earum odio,
-          optio, nisi rem deserunt. Molestiae delectus, ut assumenda numquam
-          magni enim.
-        </p>
       </Block>
 
       {/* Sheet Basket Checkout */}
