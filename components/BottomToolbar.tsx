@@ -8,7 +8,7 @@ const BottomToolbar = () => {
   const [_, dispatch]: any = useGlobalState();
 
   return (
-    <Toolbar className="bottom-0 fixed">
+    <Toolbar className="bottom-0 left-0 fixed">
       <Button className="rounded-md" onClick={() => dispatch(toggleBasket())}>
         <BiCartAlt className="text-lg" />
         <span className="ml-2">Cart</span>

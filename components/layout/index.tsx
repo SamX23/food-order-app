@@ -16,7 +16,7 @@ const Layout = ({
       />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <Page>{children}</Page>
+    <Page className="pb-4">{children}</Page>
   </>
 );
 

@@ -19,58 +19,34 @@ const Home = (): JSX.Element => {
   return (
     <Layout>
       <Navbar large transparent title="Jajanan Bu Nanay" subtitle="Subtitle" />
-      <BlockTitle>Ayo jajan di warung online bu Nanay</BlockTitle>
-      <Block strong inset>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore
-          ratione unde accusantium distinctio nulla quia numquam earum odio,
-          optio, nisi rem deserunt. Molestiae delectus, ut assumenda numquam
-          magni enim.
-        </p>
-      </Block>
 
-      <Block className="space-y-4">
+      <Block strong className="text-center">
+        <h1 className="text-xl w-[200px] mx-auto font-semibold m-0">
+          Ayo jajan di warung online{" "}
+          <span className="text-primary font-bold">Bu Nanay</span>
+        </h1>
+        <p className="text-slate-900 dark:text-slate-300">
+          Jajanan sehat halal dan berkah
+        </p>
+
         <Image
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
+          src="/assets/images/fla-3.jpg"
+          alt="Cover Kue"
+          width={300}
           height={37}
           priority
-          className="mx-auto my-4 dark:bg-white p-2 rounded"
+          className="mx-auto my-4 dark:bg-white p-1 rounded"
         />
-
-        <BlockTitle>Food List</BlockTitle>
-        <List>
-          {FOOD_DATA.map((data, index) => (
-            <FoodItem key={index} data={data} />
-          ))}
-        </List>
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore
-          ratione unde accusantium distinctio nulla quia numquam earum odio,
-          optio, nisi rem deserunt. Molestiae delectus, ut assumenda numquam
-          magni enim.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore
-          ratione unde accusantium distinctio nulla quia numquam earum odio,
-          optio, nisi rem deserunt. Molestiae delectus, ut assumenda numquam
-          magni enim.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore
-          ratione unde accusantium distinctio nulla quia numquam earum odio,
-          optio, nisi rem deserunt. Molestiae delectus, ut assumenda numquam
-          magni enim.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore
-          ratione unde accusantium distinctio nulla quia numquam earum odio,
-          optio, nisi rem deserunt. Molestiae delectus, ut assumenda numquam
-          magni enim.
-        </p>
       </Block>
+
+      <h2 className="text-center w-full text-lg font-semibold uppercase">
+        Daftar Makanan
+      </h2>
+      <List strongIos outlineIos>
+        {FOOD_DATA.map((data, index) => (
+          <FoodItem key={index} data={data} />
+        ))}
+      </List>
 
       {/* Sheet Basket Checkout */}
       <Basket />
