@@ -1,35 +1,20 @@
-import { useEffect, useState } from "react";
-import {
-  Navbar,
-  Block,
-  Button,
-  BlockTitle,
-  Toolbar,
-  Sheet,
-  Link,
-  List,
-  ListItem,
-  Toast,
-} from "konsta/react";
+import { Navbar, Block, BlockTitle, List } from "konsta/react";
 import { useGlobalState } from "@/context/Provider";
-import { addToBasket, toggleBasket } from "@/context/actions";
 import Image from "next/image";
 import Layout from "@/components/layout";
+import FoodItem from "@/components/foods/FoodItem";
+import Basket from "@/components/Basket";
+import BottomToolbar from "@/components/BottomToolbar";
+import CustomToast from "@/components/Toast";
 import { FOOD_DATA } from "@/utils/constant/FOOD_DATA";
+import useCartListener from "@/utils/hooks/cart";
 
 const Home = (): JSX.Element => {
-  const [{ basket, isBasketOpened }, dispatch]: any = useGlobalState();
-  const [toastOpened, setToastOpened] = useState<boolean>(false);
+  // State
+  const [{ basket }]: any = useGlobalState();
 
-  useEffect(() => {
-    console.log(basket);
-  }, [basket]);
-
-  const openToast = (setter: (arg0: boolean) => void) => {
-    // close other toast
-    setter(true);
-    setTimeout(() => setter(false), 1500);
-  };
+  // Hooks
+  const { lastItemName, toastOpened, setToastOpened } = useCartListener();
 
   return (
     <Layout>
@@ -56,42 +41,9 @@ const Home = (): JSX.Element => {
 
         <BlockTitle>Food List</BlockTitle>
         <List>
-          {FOOD_DATA.map(
-            (
-              { id, title, subTitle, description, price, image, quantity },
-              index
-            ) => (
-              <ListItem
-                key={index}
-                title={title}
-                after={`Rp. ${price}`}
-                subtitle={subTitle}
-                text={description}
-                media={
-                  <Image
-                    src={image}
-                    alt={title}
-                    width={80}
-                    height={80}
-                    priority
-                    className="mx-auto my-4 dark:bg-white rounded"
-                  />
-                }
-                onClick={() => {
-                  dispatch(
-                    addToBasket({
-                      id,
-                      title,
-                      price,
-                      quantity,
-                    })
-                  );
-
-                  openToast(setToastOpened);
-                }}
-              />
-            )
-          )}
+          {FOOD_DATA.map((data, index) => (
+            <FoodItem key={index} data={data} />
+          ))}
         </List>
 
         <p>
@@ -139,59 +91,17 @@ const Home = (): JSX.Element => {
       </Block>
 
       {/* Sheet Basket Checkout */}
-      <Sheet
-        className="pb-safe"
-        opened={isBasketOpened}
-        onBackdropClick={() => dispatch(toggleBasket())}
-      >
-        <Toolbar top>
-          <div className="left" />
-          <div className="right">
-            <Link toolbar onClick={() => dispatch(toggleBasket())}>
-              Done
-            </Link>
-          </div>
-        </Toolbar>
-        <Block>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum ad
-            excepturi nesciunt nobis aliquam. Quibusdam ducimus neque
-            necessitatibus, molestias cupiditate velit nihil alias incidunt,
-            excepturi voluptatem dolore itaque sapiente dolores!
-          </p>
-          <div className="mt-4">
-            <Button onClick={() => dispatch(toggleBasket())}>Action</Button>
-          </div>
-        </Block>
-      </Sheet>
+      <Basket />
+
+      {/* Basket Info */}
+      {basket.length > 0 && <BottomToolbar />}
 
       {/* Toast */}
-      <Toast
-        opened={toastOpened}
-        button={
-          <Button
-            rounded
-            clear
-            small
-            inline
-            onClick={() => setToastOpened(false)}
-          >
-            Close
-          </Button>
-        }
-      >
-        <div className="shrink">Item added to basket !</div>
-      </Toast>
-      {/* Basket Info */}
-      {basket.length > 0 && (
-        <Toolbar className="bottom-0 fixed">
-          <Block className="bg-primary w-full">
-            <Button onClick={() => dispatch(toggleBasket())}>
-              Open Basket
-            </Button>
-          </Block>
-        </Toolbar>
-      )}
+      <CustomToast
+        isOpen={toastOpened}
+        setIsOpen={setToastOpened}
+        text={lastItemName}
+      />
     </Layout>
   );
 };
