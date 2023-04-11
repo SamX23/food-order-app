@@ -3,6 +3,7 @@ import { useGlobalState } from "@/context/Provider";
 import { addToBasket } from "@/context/actions";
 import { FoodData } from "@/interfaces/food";
 import { ListItem } from "konsta/react";
+import { MdAddShoppingCart } from "react-icons/md";
 
 const FoodItem = ({
   data,
@@ -17,7 +18,11 @@ const FoodItem = ({
   return (
     <ListItem
       title={title}
-      after={<span className="text-primary font-bold">Rp. {price}</span>}
+      after={
+        <span className="text-primary font-bold flex items-center">
+          Rp. {price} <MdAddShoppingCart className="ml-2 text-xl" />
+        </span>
+      }
       subtitle={
         <span className="text-white bg-primary px-2 rounded-md">
           {subTitle}

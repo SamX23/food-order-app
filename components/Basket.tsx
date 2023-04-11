@@ -1,9 +1,9 @@
 import { Key, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Button, List, Sheet, Toolbar } from "konsta/react";
+import { Button, Sheet, Toolbar } from "konsta/react";
 import { useGlobalState } from "@/context/Provider";
 import { toggleBasket } from "@/context/actions";
-import FoodItem from "./foods/FoodItem";
+import FootItemBasket from "./foods/FoodItemBasket";
 import { FoodData } from "@/interfaces/food";
 import { TEMPLATE_WA_LINK } from "@/utils/constant/WHATSAPP";
 import { BiCartAlt } from "react-icons/bi";
@@ -16,14 +16,16 @@ const Basket = () => {
 
   const processBaskets = useCallback(() => {
     const sum = basket
-      .map((item: FoodData) => item.price)
+      .map((item: FoodData) => item.price * item.quantity)
       .reduce(
         (partialSum: number, itemPrice: number) => partialSum + itemPrice,
         0
       );
-
     setTotalPrice(sum);
-  }, [basket]);
+
+    // Auto close the basket if the basket is empty
+    sum === 0 && basket.length === 0 && dispatch(toggleBasket());
+  }, [basket, dispatch]);
 
   const handleCheckout = () => {
     setLoading(true);
@@ -58,7 +60,7 @@ const Basket = () => {
 
   return (
     <Sheet
-      className="pb-safe"
+      className="pb-safe w-full"
       opened={isBasketOpened}
       onBackdropClick={() => dispatch(toggleBasket())}
     >
@@ -68,11 +70,11 @@ const Basket = () => {
         </div>
       </Toolbar>
 
-      <List>
+      <div className="p-4 flex flex-col gap-4">
         {basket.map((data: FoodData, index: Key) => (
-          <FoodItem key={index} data={data} clickable={false} />
+          <FootItemBasket key={index} data={data} />
         ))}
-      </List>
+      </div>
 
       <div className="flex items-center justify-start w-full border-t dark:border-t-slate-700 p-4">
         <div className="bg-slate-500 text-white dark:bg-white dark:text-primary rounded-full p-2 mr-2">
