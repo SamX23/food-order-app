@@ -13,7 +13,7 @@ const CustomToast = ({ isOpen = false, setIsOpen, text = "" }: CustomToast) => {
         </Button>
       }
     >
-      <div className="shrink">{text} ditambakan ke keranjang !</div>
+      <div className="shrink">{text}</div>
     </Toast>
   );
 };
