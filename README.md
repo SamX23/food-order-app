@@ -1,5 +1,7 @@
 # README
 
+A mobile app with mobile view only to order food by selecting the food and put it on the basket, then you can order the food by redirecting the data of each food item and the quantity as a whatsapp text and send it to designated number.
+
 - [FIGJAM](https://www.figma.com/file/UA5GOuM8dDEamyZD6Wh1Nk/APP-DESIGN-DEVELOPMENT?node-id=0%3A1&t=r6SQXLnVvbl3dpU6-1)
 
 ## Getting Started
