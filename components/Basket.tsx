@@ -2,11 +2,12 @@ import { Key, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Button, Sheet, Toolbar } from "konsta/react";
 import { useGlobalState } from "@/context/Provider";
-import { toggleBasket } from "@/context/actions";
+import { addToBasket, toggleBasket } from "@/context/actions";
 import FootItemBasket from "./foods/FoodItemBasket";
 import { FoodData } from "@/interfaces/food";
 import { TEMPLATE_WA_LINK } from "@/utils/constant/WHATSAPP";
 import { BiCartAlt } from "react-icons/bi";
+import { getFromLocal } from "@/utils/useLocalStorage";
 
 const Basket = () => {
   const router = useRouter();
@@ -57,6 +58,13 @@ const Basket = () => {
   useEffect(() => {
     processBaskets();
   }, [processBaskets]);
+
+  useEffect(() => {
+    basket.length === 0 &&
+      getFromLocal("basket")?.forEach((item: FoodData) =>
+        dispatch(addToBasket(item))
+      );
+  }, [basket.length, dispatch]);
 
   return (
     <Sheet

@@ -7,6 +7,7 @@ import {
   TOGGLE_BASKET,
   REMOVE_FROM_BASKET,
 } from "./actions";
+import { storeToLocal } from "@/utils/useLocalStorage";
 
 export const initialValue: InitialValue = {
   basket: [],
@@ -28,6 +29,7 @@ export const reducer = (
       const isExist = state.basket.find((item) => item.id === action.data.id);
 
       if (!isExist) {
+        storeToLocal("basket", [...state.basket, action.data]);
         return {
           ...state,
           basket: [...state.basket, action.data],
@@ -43,6 +45,14 @@ export const reducer = (
       };
 
     case INCREASE_ITEM:
+      storeToLocal("basket", [
+        ...state.basket.map((item) =>
+          item.id === action.data.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        ),
+      ]);
+
       return {
         ...state,
         basket: state.basket.map((item) =>
@@ -57,6 +67,14 @@ export const reducer = (
         return { ...state };
       }
 
+      storeToLocal("basket", [
+        ...state.basket.map((item) =>
+          item.id === action.data.id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        ),
+      ]);
+
       return {
         ...state,
         basket: state.basket.map((item) =>
@@ -67,6 +85,10 @@ export const reducer = (
       };
 
     case REMOVE_FROM_BASKET:
+      storeToLocal("basket", [
+        ...state.basket.filter((item) => item.id !== action.data.id),
+      ]);
+
       return {
         ...state,
         basket: state.basket.filter((item) => item.id !== action.data.id),
