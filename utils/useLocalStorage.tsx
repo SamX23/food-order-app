@@ -7,3 +7,7 @@ export const getFromLocal = (key: string) => {
   const jsonValue = localStorage.getItem(key);
   return jsonValue != null ? JSON.parse(jsonValue) : null;
 };
+
+export const clearLocal = (key: string) => {
+  localStorage.removeItem(key);
+};

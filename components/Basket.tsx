@@ -7,7 +7,7 @@ import FootItemBasket from "./foods/FoodItemBasket";
 import { FoodData } from "@/interfaces/food";
 import { TEMPLATE_WA_LINK } from "@/utils/constant/WHATSAPP";
 import { BiCartAlt } from "react-icons/bi";
-import { getFromLocal } from "@/utils/useLocalStorage";
+import { clearLocal, getFromLocal } from "@/utils/useLocalStorage";
 
 const Basket = () => {
   const router = useRouter();
@@ -50,6 +50,7 @@ const Basket = () => {
 
     setTimeout(() => {
       setLoading(false);
+      clearLocal("basket");
       router.push(finalUrl);
       dispatch(toggleBasket());
     }, 1000);
