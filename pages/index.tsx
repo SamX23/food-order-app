@@ -49,7 +49,7 @@ const Home = (): JSX.Element => {
         transparent
         title="Jajanan Bu Nanay"
         right={
-          <span className="text-white text-3xl" onClick={handleSidebar}>
+          <span className="text-3xl" onClick={handleSidebar}>
             <GiHamburgerMenu />
           </span>
         }
