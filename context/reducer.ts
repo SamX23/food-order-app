@@ -6,17 +6,20 @@ import {
   DECREASE_ITEM,
   TOGGLE_BASKET,
   REMOVE_FROM_BASKET,
+  TOGGLE_DARK_MODE,
 } from "./actions";
 import { storeToLocal } from "@/utils/useLocalStorage";
 
 export const initialValue: InitialValue = {
   basket: [],
   isBasketOpened: false,
+  darkMode: false,
 };
 
 interface InitialValue {
   basket: FoodData[];
   isBasketOpened: boolean;
+  darkMode: boolean;
 }
 
 // Reducer
@@ -25,6 +28,20 @@ export const reducer = (
   action: { type: ActionTypes; data: any }
 ) => {
   switch (action.type) {
+    case TOGGLE_DARK_MODE:
+      if (!state.darkMode) {
+        localStorage.theme = "dark";
+        document.documentElement.classList.add("dark");
+      } else {
+        localStorage.theme = "light";
+        document.documentElement.classList.remove("dark");
+      }
+
+      return {
+        ...state,
+        darkMode: !state.darkMode,
+      };
+
     case ADD_TO_BASKET:
       const isExist = state.basket.find((item) => item.id === action.data.id);
 
