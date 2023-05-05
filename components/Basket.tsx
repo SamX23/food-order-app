@@ -70,7 +70,7 @@ const Basket = () => {
   return (
     <Sheet
       className="pb-safe w-full"
-      opened={isBasketOpened}
+      opened={isBasketOpened && basket.length !== 0}
       onBackdropClick={() => dispatch(toggleBasket())}
     >
       <Toolbar top>
