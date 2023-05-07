@@ -25,8 +25,11 @@ const Basket = () => {
     setTotalPrice(sum);
 
     // Auto close the basket if the basket is empty
-    sum === 0 && basket.length === 0 && dispatch(toggleBasket());
-  }, [basket, dispatch]);
+    sum === 0 &&
+      basket.length === 0 &&
+      isBasketOpened &&
+      dispatch(toggleBasket());
+  }, [basket, dispatch, isBasketOpened]);
 
   const handleCheckout = () => {
     setLoading(true);
@@ -70,7 +73,7 @@ const Basket = () => {
   return (
     <Sheet
       className="pb-safe w-full"
-      opened={isBasketOpened && basket.length !== 0}
+      opened={isBasketOpened}
       onBackdropClick={() => dispatch(toggleBasket())}
     >
       <Toolbar top>
