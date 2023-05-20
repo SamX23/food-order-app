@@ -1,4 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import { Navbar, Block, List } from "konsta/react";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useGlobalState } from "@/context/Provider";
 import Image from "next/image";
 import Layout from "@/components/layout";
@@ -9,7 +12,6 @@ import CustomToast from "@/components/Toast";
 import { FOOD_DATA } from "@/utils/constant/FOOD_DATA";
 import useCartListener from "@/utils/hooks/cart";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useEffect, useRef, useState } from "react";
 import SidePanel from "@/components/layout/SidePanel";
 import Typed from "typed.js";
 
@@ -21,6 +23,7 @@ const Home = (): JSX.Element => {
 
   // Hooks
   const { lastItemName, toastOpened, setToastOpened } = useCartListener();
+  const { t } = useTranslation("common");
 
   // Functions
   const handleSidebar = () => {
@@ -56,7 +59,7 @@ const Home = (): JSX.Element => {
       />
       <Block strong className="text-center">
         <h1 className="text-xl w-[200px] mx-auto font-semibold">
-          Ayo jajan di warung online{" "}
+          {t("home-title")}{" "}
           <span className="text-primary font-bold">Bu Nanay</span>
         </h1>
         <p>
@@ -104,3 +107,12 @@ const Home = (): JSX.Element => {
 };
 
 export default Home;
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+      // Will be passed to the page component as props
+    },
+  };
+}
