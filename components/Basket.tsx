@@ -71,17 +71,7 @@ const Basket = () => {
   }, [basket.length, dispatch]);
 
   return (
-    <Sheet
-      className="pb-safe w-full"
-      opened={isBasketOpened}
-      onBackdropClick={() => dispatch(toggleBasket())}
-    >
-      <Toolbar top>
-        <div className="flex items-center justify-center w-full">
-          <span className="font-bold uppercase">Keranjang Pesanan</span>
-        </div>
-      </Toolbar>
-
+    <>
       <div className="p-4 flex flex-col gap-4">
         {basket.map((data: FoodData, index: Key) => (
           <FootItemBasket key={index} data={data} />
@@ -107,7 +97,7 @@ const Basket = () => {
           {loading ? "Membuka whatsapp" : "Beli Sekarang"}
         </Button>
       </div>
-    </Sheet>
+    </>
   );
 };
 

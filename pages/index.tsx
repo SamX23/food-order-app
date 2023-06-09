@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { Navbar, Block, List } from "konsta/react";
+import { useEffect, useRef } from "react";
+import { Block, BlockHeader, BlockTitle, List } from "konsta/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useGlobalState } from "@/context/Provider";
@@ -8,27 +8,19 @@ import Layout from "@/components/layout";
 import FoodItem from "@/components/foods/FoodItem";
 import Basket from "@/components/Basket";
 import BottomToolbar from "@/components/BottomToolbar";
-import CustomToast from "@/components/Toast";
 import { FOOD_DATA } from "@/utils/constant/FOOD_DATA";
-import useCartListener from "@/utils/hooks/cart";
-import { GiHamburgerMenu } from "react-icons/gi";
-import SidePanel from "@/components/layout/SidePanel";
 import Typed from "typed.js";
+import { toggleBasket } from "@/context/actions";
 
 const Home = (): JSX.Element => {
   // State
-  const [{ basket }]: any = useGlobalState();
-  const [panelOpened, setPanelOpened] = useState<boolean>(false);
+  const [{ basket, isBasketOpened }, dispatch]: any = useGlobalState();
   const textElement = useRef(null);
 
   // Hooks
-  const { lastItemName, toastOpened, setToastOpened } = useCartListener();
   const { t } = useTranslation("common");
 
   // Functions
-  const handleSidebar = () => {
-    setPanelOpened(true);
-  };
 
   useEffect(() => {
     const typed = new Typed(textElement.current, {
@@ -46,62 +38,66 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <Layout>
-      <Navbar
-        large
-        transparent
-        title="Jajanan Bu Nanay"
-        right={
-          <span className="text-3xl" onClick={handleSidebar}>
-            <GiHamburgerMenu />
-          </span>
-        }
-      />
-      <Block strong className="text-center">
-        <h1 className="text-xl w-[200px] mx-auto font-semibold">
-          {t("home-title")}{" "}
-          <span className="text-primary font-bold">Bu Nanay</span>
-        </h1>
-        <p>
-          <span className="text-red-500 font-semibold" ref={textElement} />
-        </p>
-        <p className="text-slate-900 dark:text-slate-300">
-          Jajanan sehat, halal dan berkah asli Cianjur
-        </p>
+    <Layout metaTitle="Jajanan Bu Nanay">
+      <Layout.Header title="Jajanan Bu Nanay" />
+      <Layout.Content>
+        <BlockTitle className="text-center">
+          <h1 className="text-xl w-[200px] mx-auto font-semibold">
+            {t("home-title")}{" "}
+            <span className="text-primary font-bold">Bu Nanay</span>
+          </h1>
+        </BlockTitle>
+        <BlockHeader className="text-center">
+          <div className="w-full">
+            <p>
+              <span className="text-red-500 font-semibold" ref={textElement} />
+            </p>
+            <p className="text-slate-900 dark:text-slate-300">
+              Jajanan sehat, halal dan berkah asli Cianjur
+            </p>
+          </div>
+        </BlockHeader>
+        <Block strong inset outline>
+          <Image
+            src="/assets/images/fla-3.jpg"
+            alt="Cover Kue"
+            width={300}
+            height={37}
+            priority
+            className="mx-auto my-4 dark:bg-white p-1 rounded"
+          />
+        </Block>
 
-        <Image
-          src="/assets/images/fla-3.jpg"
-          alt="Cover Kue"
-          width={300}
-          height={37}
-          priority
-          className="mx-auto my-4 dark:bg-white p-1 rounded"
-        />
-      </Block>
-      <div className="text-center w-full">
-        <h2 className="text-lg font-semibold uppercase">Daftar Makanan</h2>
-        <p className="text-slate-900 dark:text-slate-300 text-xs">
-          Tekan makanan untuk ditambahkan ke keranjang
-        </p>
-      </div>
-      <List strongIos>
-        {FOOD_DATA.map((data, index) => (
-          <FoodItem key={index} data={data} />
-        ))}
-      </List>
-      {/* Sheet Basket Checkout */}
-      <Basket />
+        <Block strong inset outline>
+          <div className="text-center w-full">
+            <h2 className="text-lg font-semibold uppercase">Daftar Makanan</h2>
+            <p className="text-slate-900 dark:text-slate-300 text-xs">
+              Tekan makanan untuk ditambahkan ke keranjang
+            </p>
+          </div>
+        </Block>
+        <List strong outline>
+          {FOOD_DATA.map((data, index) => (
+            <FoodItem key={index} data={data} />
+          ))}
+        </List>
+      </Layout.Content>
+
       {/* Basket Info */}
-      {basket.length > 0 && <BottomToolbar />}
-      {/* Toast */}
-      <CustomToast
-        isOpen={toastOpened}
-        setIsOpen={setToastOpened}
-        text={lastItemName}
-      />
+      {basket.length > 0 && (
+        <Layout.Footer>
+          <BottomToolbar />
+        </Layout.Footer>
+      )}
+      {/* Sheet Basket Checkout */}
 
-      {/* Sidepanel */}
-      <SidePanel open={panelOpened} setOpen={setPanelOpened} />
+      <Layout.SheetModal
+        title="Keranjang Pesanan"
+        isOpen={isBasketOpened}
+        setIsOpen={() => dispatch(toggleBasket())}
+      >
+        <Basket />
+      </Layout.SheetModal>
     </Layout>
   );
 };
