@@ -1,7 +1,7 @@
+import React from "react";
+import { Button } from "konsta/react";
 import { useGlobalState } from "@/context/Provider";
 import { toggleBasket } from "@/context/actions";
-import { Button } from "konsta/react";
-import React from "react";
 import { BiCartAlt } from "react-icons/bi";
 
 const BottomToolbar = () => {
