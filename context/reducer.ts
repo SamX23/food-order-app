@@ -1,7 +1,5 @@
-import { FoodData } from "@/interfaces/food";
 import {
   ADD_TO_BASKET,
-  ActionTypes,
   INCREASE_ITEM,
   DECREASE_ITEM,
   TOGGLE_BASKET,
@@ -9,18 +7,13 @@ import {
   TOGGLE_DARK_MODE,
 } from "./actions";
 import { storeToLocal } from "@/utils/useLocalStorage";
+import { ActionTypes, InitialValue } from "@/interfaces/etc";
 
 export const initialValue: InitialValue = {
   basket: [],
   isBasketOpened: false,
   darkMode: false,
 };
-
-interface InitialValue {
-  basket: FoodData[];
-  isBasketOpened: boolean;
-  darkMode: boolean;
-}
 
 // Reducer
 export const reducer = (

@@ -1,5 +1,5 @@
-import { useGlobalState } from "@/context/Provider";
 import { useCallback, useEffect, useState } from "react";
+import { useGlobalState } from "@/context/Provider";
 
 const useCartListener = () => {
   const [{ basket }]: any = useGlobalState();
