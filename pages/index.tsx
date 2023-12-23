@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { ReactElement, useEffect, useRef } from "react";
 import { Block, BlockHeader, BlockTitle, List } from "konsta/react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
@@ -11,8 +11,10 @@ import Basket from "@/components/Basket";
 import BottomToolbar from "@/components/BottomToolbar";
 import { FOOD_DATA } from "@/utils/constant/FOOD_DATA";
 import { toggleBasket } from "@/context/actions";
+import { NextPageWithLayout } from "./_app";
+import MobileContainer from "@/components/container/MobileContainer";
 
-const Home = (): JSX.Element => {
+const Home: NextPageWithLayout = () => {
   // State
   const [{ basket, isBasketOpened }, dispatch]: any = useGlobalState();
   const textElement = useRef(null);
@@ -21,7 +23,6 @@ const Home = (): JSX.Element => {
   const { t } = useTranslation("common");
 
   // Functions
-
   useEffect(() => {
     const typed = new Typed(textElement.current, {
       strings: ["Kemplang", "Fla Hijau", "Brownies Kukus", "Roti Talem"],
@@ -101,6 +102,10 @@ const Home = (): JSX.Element => {
     </Layout>
   );
 };
+
+Home.getLayout = (page: ReactElement) => (
+  <MobileContainer>{page}</MobileContainer>
+);
 
 export default Home;
 
