@@ -1,4 +1,3 @@
-import supabase from "@/utils/supabase";
 import {
   Suspense,
   useCallback,
@@ -7,14 +6,6 @@ import {
   useRef,
   useState,
 } from "react";
-
-interface StateProps {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-}
 
 const DashboardPage = () => {
   const [data, setData] = useState<number>(100);
