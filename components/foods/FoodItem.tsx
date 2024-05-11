@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { useGlobalState } from "@/context/Provider";
-import { addToBasket } from "@/context/actions";
-import { FoodData } from "@/interfaces/food";
 import { ListItem } from "konsta/react";
 import { MdAddShoppingCart } from "react-icons/md";
+
+import { addToBasket } from "@/context/actions";
+import { useGlobalState } from "@/context/Provider";
+import { FoodData } from "@/interfaces/food";
 
 const FoodItem = ({
   data,

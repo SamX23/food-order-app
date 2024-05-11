@@ -1,13 +1,13 @@
+import { ActionTypes, InitialValue } from "@/interfaces/etc";
+import { storeToLocal } from "@/utils/useLocalStorage";
 import {
   ADD_TO_BASKET,
-  INCREASE_ITEM,
   DECREASE_ITEM,
-  TOGGLE_BASKET,
+  INCREASE_ITEM,
   REMOVE_FROM_BASKET,
+  TOGGLE_BASKET,
   TOGGLE_DARK_MODE,
 } from "./actions";
-import { storeToLocal } from "@/utils/useLocalStorage";
-import { ActionTypes, InitialValue } from "@/interfaces/etc";
 
 export const initialValue: InitialValue = {
   basket: [],

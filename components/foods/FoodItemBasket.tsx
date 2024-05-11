@@ -1,13 +1,14 @@
 import Image from "next/image";
-import { useGlobalState } from "@/context/Provider";
-import {
-  increaseItem,
-  decreaseItem,
-  removeFromBasket,
-} from "@/context/actions";
-import { FoodData } from "@/interfaces/food";
 import { Button, Stepper } from "konsta/react";
 import { FiTrash } from "react-icons/fi";
+
+import {
+  decreaseItem,
+  increaseItem,
+  removeFromBasket,
+} from "@/context/actions";
+import { useGlobalState } from "@/context/Provider";
+import { FoodData } from "@/interfaces/food";
 
 const FoodItemBasket = ({ data }: { data: FoodData }) => {
   const { title, price, image, quantity } = data;

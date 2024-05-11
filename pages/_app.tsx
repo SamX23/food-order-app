@@ -1,7 +1,9 @@
+import type { AppProps } from "next/app";
+
 import { ReactElement, ReactNode } from "react";
 import { NextPage } from "next";
-import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
+
 import ContextProvider from "@/context/Provider";
 
 import "@/styles/globals.css";

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import {
   Block,
   Link,
@@ -10,16 +10,17 @@ import {
   Sheet,
   Toolbar,
 } from "konsta/react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+
 import {
   PagesContainerProps,
   PagesHeaderProps,
   PagesSheetsProps,
   ParentSectionProps,
 } from "@/interfaces/component";
-import CustomToast from "../Toast";
 import useCartListener from "@/utils/hooks/cart";
-import { GiHamburgerMenu } from "react-icons/gi";
+import CustomToast from "../Toast";
 import SidePanel from "./SidePanel";
 
 /**

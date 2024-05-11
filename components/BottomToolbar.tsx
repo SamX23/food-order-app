@@ -1,8 +1,9 @@
 import React from "react";
 import { Button } from "konsta/react";
-import { useGlobalState } from "@/context/Provider";
-import { toggleBasket } from "@/context/actions";
 import { BiCartAlt } from "react-icons/bi";
+
+import { toggleBasket } from "@/context/actions";
+import { useGlobalState } from "@/context/Provider";
 
 const BottomToolbar = () => {
   const [_, dispatch]: any = useGlobalState();

@@ -1,5 +1,4 @@
-import { useGlobalState } from "@/context/Provider";
-import { toggleDarkMode } from "@/context/actions";
+import Link from "next/link";
 import {
   BlockTitle,
   Link as KonstaLink,
@@ -10,7 +9,9 @@ import {
   Panel,
   Toggle,
 } from "konsta/react";
-import Link from "next/link";
+
+import { toggleDarkMode } from "@/context/actions";
+import { useGlobalState } from "@/context/Provider";
 
 const SidePanel = ({ open, setOpen }: any) => {
   const [{ darkMode }, dispatch]: any = useGlobalState();
