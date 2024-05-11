@@ -2,5 +2,22 @@
   "trailingComma": "es5",
   "tabWidth": 2,
   "semi": true,
-  "singleQuote": false
+  "singleQuote": false,
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "@ianvs/prettier-plugin-sort-imports"
+  ],
+  "importOrder": [
+    "<TYPES>^react$",
+    "<TYPES>^next",
+    "<TYPES>",
+    "<TYPES>^[.]",
+    "",
+    "^react$",
+    "^next",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^(@)(/.*)$",
+    "^[.]"
+  ]
 }
