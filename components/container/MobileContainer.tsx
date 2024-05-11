@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { useGlobalState } from "@/context/Provider";
 import { App as KonstaApp } from "konsta/react";
+
 import { toggleDarkMode } from "@/context/actions";
+import { useGlobalState } from "@/context/Provider";
 
 const MobileContainer = ({ children }: any) => {
   const [_, dispatch]: any = useGlobalState();

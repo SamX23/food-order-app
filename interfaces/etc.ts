@@ -1,10 +1,10 @@
 import {
   ADD_TO_BASKET,
-  TOGGLE_BASKET,
-  INCREASE_ITEM,
   DECREASE_ITEM,
-  TOGGLE_DARK_MODE,
+  INCREASE_ITEM,
   REMOVE_FROM_BASKET,
+  TOGGLE_BASKET,
+  TOGGLE_DARK_MODE,
 } from "@/context/actions";
 import { FoodData } from "./food";
 

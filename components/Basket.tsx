@@ -1,13 +1,14 @@
 import { Key, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Button, Sheet, Toolbar } from "konsta/react";
-import { useGlobalState } from "@/context/Provider";
+import { BiCartAlt } from "react-icons/bi";
+
 import { addToBasket, toggleBasket } from "@/context/actions";
-import FootItemBasket from "./foods/FoodItemBasket";
+import { useGlobalState } from "@/context/Provider";
 import { FoodData } from "@/interfaces/food";
 import { TEMPLATE_WA_LINK } from "@/utils/constant/WHATSAPP";
-import { BiCartAlt } from "react-icons/bi";
 import { clearLocal, getFromLocal } from "@/utils/useLocalStorage";
+import FootItemBasket from "./foods/FoodItemBasket";
 
 const Basket = () => {
   const router = useRouter();

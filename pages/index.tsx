@@ -1,18 +1,19 @@
 import { ReactElement, useEffect, useRef } from "react";
-import { Block, BlockHeader, BlockTitle, List } from "konsta/react";
-import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import Typed from "typed.js";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useGlobalState } from "@/context/Provider";
-import Layout from "@/components/layout";
-import FoodItem from "@/components/foods/FoodItem";
+import Image from "next/image";
+import { Block, BlockHeader, BlockTitle, List } from "konsta/react";
+import Typed from "typed.js";
+
 import Basket from "@/components/Basket";
 import BottomToolbar from "@/components/BottomToolbar";
-import { FOOD_DATA } from "@/utils/constant/FOOD_DATA";
-import { toggleBasket } from "@/context/actions";
-import { NextPageWithLayout } from "./_app";
 import MobileContainer from "@/components/container/MobileContainer";
+import FoodItem from "@/components/foods/FoodItem";
+import Layout from "@/components/layout";
+import { toggleBasket } from "@/context/actions";
+import { useGlobalState } from "@/context/Provider";
+import { FOOD_DATA } from "@/data/FOOD_DATA";
+import { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
   // State

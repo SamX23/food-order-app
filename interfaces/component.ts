@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from "react";
 
-export interface CustomToast {
+export interface CustomToastProps {
   isOpen: boolean;
   setIsOpen: any;
   text: string;
